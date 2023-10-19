@@ -40,3 +40,18 @@
 11. Hash password
     - npm i bcrypt
     - hash password
+
+12. Login
+    - find user by email
+    - validate password with hash
+
+13. Generate jsonwebtoken
+    - npm i jsonwebtoken
+    - promisify jsonwebtoken
+    - generate secret
+    - generate token in service login
+
+14. Return token in cookie
+    - npm i cookie-parser
+    - comfigure cookie-parser
+    - set cookies with token
