@@ -55,3 +55,6 @@
     - npm i cookie-parser
     - comfigure cookie-parser
     - set cookies with token
+
+15. Implement logout
+15. Authentication middleware
