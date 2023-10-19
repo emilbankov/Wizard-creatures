@@ -57,4 +57,8 @@
     - set cookies with token
 
 15. Implement logout
-15. Authentication middleware
+16. Authentication middleware
+    - create middleware folder
+    - add auth middleware and import it in expres configuration below cookie-parser
+    - decode the token
+    - handle invalid token
