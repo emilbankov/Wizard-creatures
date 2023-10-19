@@ -75,4 +75,7 @@
     - add error message util
 
 19. Show error notification
-    - 
+    - show in main layout
+    - pass error to render in login and register pages
+
+20. Automatically login after register
