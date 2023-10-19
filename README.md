@@ -62,3 +62,17 @@
     - add auth middleware and import it in expres configuration below cookie-parser
     - decode the token
     - handle invalid token
+    - provide authorization
+
+17. Dynamic navigation
+    - conditional options in navigation
+    - add data to res.locals for hbs templates
+
+18. Error handling
+    - add 404 page
+    - redirect miising rout to 404
+    - add global error handler
+    - add error message util
+
+19. Show error notification
+    - 
