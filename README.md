@@ -29,3 +29,14 @@
     - add controller to routes
     - fix navigations in the nav bar
     - render login and register page
+
+10. Add user model
+    - simple validation in Schema
+    - add method for register
+    - create first User record in the DB
+    - validate password missmatch
+    - validate unique email
+
+11. Hash password
+    - npm i bcrypt
+    - hash password
