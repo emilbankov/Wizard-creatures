@@ -18,3 +18,8 @@
 
 6. Convert all html files to handlebars views
     - group views by meaning
+
+7. Add controllers folder with home controller
+8. Add database
+    - npm i mongoose
+    - connect to DB
