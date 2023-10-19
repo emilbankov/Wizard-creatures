@@ -23,3 +23,9 @@
 8. Add database
     - npm i mongoose
     - connect to DB
+
+9. Prepare user functionality 
+    - user controller
+    - add controller to routes
+    - fix navigations in the nav bar
+    - render login and register page
