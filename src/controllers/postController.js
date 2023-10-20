@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const creatureService = require("../services/creatureService.js");
+const { isAuth } = require("../middlewares/authMiddleware.js");
+const { extractErrorMsgs } = require("../utils/errorHandler.js");
 
 router.get('/all', async (req, res) => {
     const creatures = await creatureService.getAll().lean();
@@ -7,19 +9,24 @@ router.get('/all', async (req, res) => {
     res.render("post/all-posts", { creatures });
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render("post/create");
 });
 
 router.post('/create', async (req, res) => {
     const { name, species, skinColor, eyeColor, image, description } = req.body;
     const payload = { name, species, skinColor, eyeColor, image, description, owner: req.user };
-    await creatureService.create(payload);
-
-    res.redirect("/posts/all");
+    
+    try {
+        await creatureService.create(payload);
+        res.redirect("/posts/all");
+    } catch (error) {
+        const errorMessages = extractErrorMsgs(error);
+        res.status(404).render("post/create", { errorMessages });
+    }
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', isAuth, async (req, res) => {
     const { user } = req;
     const myCreatures = await creatureService.getMyCreatures(user?._id).lean();
 
@@ -35,8 +42,9 @@ router.get('/:creatureId/details', async (req, res) => {
 
     const isOwner = user?._id === owner.toString();
     const hasVoted = creature.votes?.some((v) => v?.toString() === user?._id);
+    const emails = creature.votes.map((v) => v.email).join(", ");
 
-    res.render("post/details", { creature, isOwner, hasVoted });
+    res.render("post/details", { creature, isOwner, hasVoted, emails });
 });
 
 router.get('/:creatureId/edit', async (req, res) => {
