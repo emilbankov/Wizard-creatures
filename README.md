@@ -91,7 +91,6 @@
     - if the users isn't the owner - vote button
 
 24. Vote button
-    - when clicked - "Voted"
     - redirect to the details page of the current creature
     - show the email of the people voted
     - if user already voted - "Thanks for voting" message

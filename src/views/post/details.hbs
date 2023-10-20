@@ -6,7 +6,7 @@
                 <div class="card_datails">
 
                     <h1>Name: {{creature.name}}</h1>
-                    <h3>Created by an author: {{firstName}} {{lastName}}</h3>
+                    <h3>Created by an author: {{owner.firstName}} {{owner.lastName}}</h3>
                     <div class="card_character">
                         <p class="card-species">Species: {{creature.species}}</p>
                         <p class="card-skin">Skin colour: {{creature.skinColor}}</p>
@@ -19,12 +19,17 @@
                     {{#if isAuthenticated}}
                     <div class="social-btn">
                         {{#if isOwner}}
-                        <a href="/posts/{{creature._id}}/edit" class="edit-btn">Edit</a>
-                        <a href="/posts/{{creature._id}}/delete" class="del-btn">Delete</a>
+                            <a href="/posts/{{creature._id}}/edit" class="edit-btn">Edit</a>
+                            <a href="/posts/{{creature._id}}/delete" class="del-btn">Delete</a>
                         {{else}}
-                        <a href="#" class="vote-up">Vote</a>
+                            {{#unless hasVoted}}
+                                <a href="/posts/{{creature._id}}/vote" class="vote-up">Vote</a>
+                            {{/unless}}
                         {{/if}}
-                        <p class="thanks-for-vote">Thanks For Voting</p>
+                        
+                        {{#if hasVoted}}
+                            <p class="thanks-for-vote">Thanks For Voting</p>
+                        {{/if}}    
                     </div>
                     {{/if}}
                 </div>

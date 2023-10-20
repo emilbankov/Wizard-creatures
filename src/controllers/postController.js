@@ -19,19 +19,24 @@ router.post('/create', async (req, res) => {
     res.redirect("/posts/all");
 });
 
-router.get('/profile', (req, res) => {
-    res.render("post/profile");
+router.get('/profile', async (req, res) => {
+    const { user } = req;
+    const myCreatures = await creatureService.getMyCreatures(user?._id).lean();
+
+    res.render("post/profile", { myCreatures });
 });
 
 router.get('/:creatureId/details', async (req, res) => {
-    const { creatureId } = req.params;
-    const creature = await creatureService.getSingleCreature(creatureId).lean();
-
     const { user } = req;
-    const { owner } = creature;
-    const isOwner = user?._id === owner.toString();
+    const { creatureId } = req.params;
 
-    res.render("post/details", { creature, isOwner });
+    const creature = await creatureService.getSingleCreature(creatureId).lean();
+    const { owner } = creature;
+
+    const isOwner = user?._id === owner.toString();
+    const hasVoted = creature.votes?.some((v) => v?.toString() === user?._id);
+
+    res.render("post/details", { creature, isOwner, hasVoted });
 });
 
 router.get('/:creatureId/edit', async (req, res) => {
@@ -55,6 +60,14 @@ router.get('/:creatureId/delete', async (req, res) => {
     await creatureService.delete(creatureId);
 
     res.redirect("/posts/all");
+});
+
+router.get('/:creatureId/vote', async (req, res) => {
+    const { creatureId } = req.params;
+    const { _id } = req.user;
+    await creatureService.addVotesToCreature(creatureId, _id);
+
+    res.redirect(`/posts/${creatureId}/details`);
 });
 
 module.exports = router;
