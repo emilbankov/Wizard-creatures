@@ -79,3 +79,38 @@
     - pass error to render in login and register pages
 
 20. Automatically login after register
+21. Add creature model to mongoose
+22. Implement - All posts page
+    - show each creature with image, name, description, species
+    - add details button to every creature
+
+23. Add details page
+    - if no creatures - "There are no posts yet..."
+    - if the user is the owner of the post should have "Edit" and "Delete" buttons
+    - if the users hasn't logged in - no buttons
+    - if the users isn't the owner - vote button
+
+24. Vote button
+    - when clicked - "Voted"
+    - redirect to the details page of the current creature
+    - show the email of the people voted
+    - if user already voted - "Thanks for voting" message
+
+25. Add creature
+    - on success redirect to All posts page
+
+26. Delete creature
+    - on success redirect to All posts page
+
+26. Edit creature
+    - on success redirect to the details page of the current creature
+
+27. Routes guards - check
+28. Validations
+    - login
+    - register
+    - animals
+
+29. Bonus - profile
+    - show my posts
+    - if there no posts - message
